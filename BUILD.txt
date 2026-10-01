@@ -1,0 +1,13 @@
+Build dependencies: CPython 3.13, Zig 0.13.0, and the runtime/ directory from
+FNV Asset Sorter 1.0 portable release (Windows CPython 3.13.16 with Tk).
+
+python3.13 build_release.py --runtime /path/to/runtime --zig /path/to/zig --output /fresh/output
+
+Works as a cross-build on Linux using Zig's Windows target. Keep source/app.ico,
+app.rc and app.manifest together. No third-party Python packages are required.
+Run source/tests/test_sorter.py with Python for regression tests.
+Build produces bytecode-only app modules and an asInvoker Windows GUI launcher.
+Source package does not contain a runtime, build compiler, caches or binaries.
+Format references:
+https://github.com/TES5Edit/fopdoc
+https://www.niftools.org/nifxml/index.html

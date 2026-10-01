@@ -1,0 +1,21 @@
+FNV Asset Sorter 1.0 — implementation review
+
+No network access, shell commands, elevation, source deletion or plugin writes.
+Native launcher starts fixed bundled pythonw.exe in isolated mode. DLL search
+is hardened; launcher has ASLR/DEP. Runtime/ must remain alongside the EXE.
+Input/output overlap and junction/symlink paths are rejected. Output must start
+empty. Copies publish atomically without overwriting existing files. Input size
+and mtime are checked before/after copies; plugin hashes before/after the job.
+Incomplete jobs remain visibly marked. CSV formula prefixes are escaped.
+BSA/plugin record lengths, decompression limits, archive file ranges and plugin
+group depth are checked. Unsupported/malformed inputs stop the job. Paths with
+traversal, alternate data streams or Windows reserved device names are rejected.
+Cancellation is cooperative, between records/files/operations. Large file IO or
+archive parsing may delay it. Logs and UI previews have bounded row counts.
+
+Residual limits: no sandbox against same-user concurrent filesystem tampering,
+no signature/authenticity check on plugins/game archives, no formal penetration
+test or dependency vulnerability scan. Application is unsigned. Windows GUI
+execution and FNV gameplay were not tested in this environment. Whole-master
+scanning and string-based NIF inspection intentionally favor conservative output.
+Originals should be retained; reports distinguish findings and uncertainty.
